@@ -1,0 +1,3 @@
+###### ignore some temp files
+.vscode/**
+node_modules/**
