@@ -1,3 +1,8 @@
-###### ignore some temp files
 .vscode/**
 node_modules/**
+.gradle
+*.iml
+.idea/
+.idea_modules/
+**/build/classes/
+tmp/
