@@ -67,9 +67,6 @@ config.serveDirs.forEach(function (sd) {
     });
 });
 
-console.log(`Start static file server at ::${LOCAL_BIND_PORT}, Press ^ + C to exit`);
-app.listen(LOCAL_BIND_PORT);
-
 if (config.https.enable) {
 	const sslOptions = {
 	  key: fs.readFileSync(config.https.key),
@@ -78,4 +75,7 @@ if (config.https.enable) {
 	};
 	const server = https.createServer(sslOptions, app).listen(config.https.port);
 	console.log(`Start https static file server at ::${config.https.port}, Press ^ + C to exit`);
+} else {
+	console.log(`Start static file server at ::${LOCAL_BIND_PORT}, Press ^ + C to exit`);
+	app.listen(LOCAL_BIND_PORT);
 }
