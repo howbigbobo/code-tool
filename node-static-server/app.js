@@ -2,6 +2,7 @@ var express = require('express'),
     serveIndex = require('serve-index'), //只能列表目录，不能下载文件？  
     serveStatic = require('serve-static'),
     fs = require('fs');
+var https = require('https');
 var config = JSON.parse(fs.readFileSync("./config.json"));
 /* 
 $ brew install node@8.4.0 
@@ -68,3 +69,13 @@ config.serveDirs.forEach(function (sd) {
 
 console.log(`Start static file server at ::${LOCAL_BIND_PORT}, Press ^ + C to exit`);
 app.listen(LOCAL_BIND_PORT);
+
+if (config.https.enable) {
+	const sslOptions = {
+	  key: fs.readFileSync(config.https.key),
+	  cert: fs.readFileSync(config.https.crt),
+	  passphrase: 'changeit'
+	};
+	const server = https.createServer(sslOptions, app).listen(config.https.port);
+	console.log(`Start https static file server at ::${config.https.port}, Press ^ + C to exit`);
+}
