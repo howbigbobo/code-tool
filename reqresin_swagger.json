@@ -30,7 +30,7 @@
     }
   ],
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/users": {
