@@ -1,0 +1,159 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Informatica Cloud RestV2 connector Test",
+    "version": "1.0.0",
+    "title": "Informatica Cloud RestV2 connector Test"
+  },
+  "host": "reqres.in",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "pet",
+      "description": "Post",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "https://reqres.in"
+      }
+    },
+    {
+      "name": "store",
+      "description": "Access to Petstore orders"
+    },
+    {
+      "name": "user",
+      "description": "Operations about user",
+      "externalDocs": {
+        "description": "Find out more about our store",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Create user",
+        "description": "",
+        "operationId": "addUser",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User objectt",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UserRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/User"
+            }
+          },
+          "405": {
+            "description": "Invalid input"
+          }
+        }
+      }
+    },
+    "/products/3": {
+      "get": {
+        "summary": "Get product",
+        "description": "Get product by id",
+        "operationId": "getProduct",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Product"
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "name": {
+              "type": "string"
+            },
+            "year": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "color": {
+              "type": "string"
+            },
+            "pantone_value": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "UserRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "movies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "movies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdAt": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
