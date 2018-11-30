@@ -1,0 +1,166 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Try the testing environment",
+    "description": "### How to try it out\n 1. copy apikey (d984f44a) to /token parameter \"apikey\".\n 2. copy secret (bef3840e343a336ca193896ed31a2118) to /token parameter \"secret\".\n 3. click \"Try it out\".\n 4. You will receive a string alike \"Bearer 38aca5a85b96fd9720848ab719c11931092dd89c\" in section \"Response Body\".\n 5. Copy \"Bearer xxxxxxxx\" string you receive last step to the header \"Authorization\" in api you want to try.\n 6. Copy apikey (d984f44a) string to the header \"apikey\" in api you want to try.\n 7. Full fill other parameters that api required.\n 8. click \"Try it out\".\n 9. You got it. \n\n### Necessary Parameters\n#### apikey = d984f44a\n#### secret = bef3840e343a336ca193896ed31a2118\nNOTE: This pair of apikey and secret is only for \"Try it out\" in this document, you should apply your own apikey and secret.\n"
+  },
+  "tags": [
+    {
+      "name": "Token",
+      "description": "Generate 3scale token"
+    },
+    {
+      "name": "ehdata",
+      "description": "search data from DB"
+    }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "host": "api.bob.com",
+  "basePath": "/ehdata/v1",
+  "paths": {
+    "/token": {
+      "parameters": [
+        {
+          "name": "apikey",
+          "in": "query",
+          "description": "API Credentials - Client ID",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "secret",
+          "in": "query",
+          "description": "API Credentials - Client Secret",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "get": {
+        "tags": [
+          "Token"
+        ],
+        "summary": "Wrapper of generate the authorzation to call 3sacle API",
+        "description": "Return the token string such as \"Bearer 38aca5a85b96fd9720848ab719c11931092dd89c\" that will be used as header \"Authorization\" in the other API call. The token own 24 hours validit",
+        "produces": [
+          "text/plain"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "string",
+              "example": "Bearer 38aca5a85b96fd9720848ab719c11931092dd89c"
+            }
+          }
+        }
+      }
+    },
+    "/COA": {
+      "parameters": [
+        {
+          "name": "startDate",
+          "in": "query",
+          "description": "Start Month, format yyyyMM (Example- 201704)",
+          "type": "string",
+          "format": "yyyymm",
+          "required": true
+        },
+        {
+          "name": "endDate",
+          "in": "query",
+          "description": "End Month, format yyyyMM (Example- 201711)",
+          "type": "string",
+          "format": "yyyymm",
+          "required": true
+        },
+        {
+          "name": "apikey",
+          "in": "header",
+          "description": "the 3scale apikey",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "in": "header",
+          "description": "the 3scale Authorization Token",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "ehdata"
+        ],
+        "summary": "Returns COA Estimated and Actuals for months requested",
+        "description": "Acquisition dollars spent in three channels- Direct, Online and Performance Partners divided by the number of Approved Applications in a given time period.",
+        "responses": {
+          "200": {
+            "description": "COA information found"
+          },
+          "400": {
+            "description": "Invalid month and year supplied"
+          },
+          "404": {
+            "description": "COA info not found"
+          }
+        }
+      }
+    },
+    "/BOB": {
+      "parameters": [
+        {
+          "name": "startDate",
+          "in": "query",
+          "description": "Start Month (Example- 201704)",
+          "type": "string",
+          "format": "yyyymm",
+          "required": true
+        },
+        {
+          "name": "endDate",
+          "in": "query",
+          "description": "End Month (Example- 201711)",
+          "type": "string",
+          "format": "yyyymm",
+          "required": true
+        },
+        {
+          "name": "apikey",
+          "in": "header",
+          "description": "for 3sacle apikey",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "Authorization",
+          "in": "header",
+          "description": "for 3sacle Authorization Token",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "ehdata"
+        ],
+        "summary": "Returns BOB Estimated and Actuals for months requested",
+        "description": "BOB table contains estimated and actual number of Members broken down by Products. Records from the most recent month represent number of estimated Members. All previous months contain total number of actual Members.",
+        "responses": {
+          "200": {
+            "description": "BOB information found"
+          },
+          "400": {
+            "description": "Invalid month and year supplied"
+          },
+          "404": {
+            "description": "BOB info not found"
+          }
+        }
+      }
+    }
+  }
+}
