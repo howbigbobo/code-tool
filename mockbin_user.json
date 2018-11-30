@@ -1,0 +1,79 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Try the testing environment",
+    "description": "get and create user"
+  },
+  "schemes": [
+    "http"
+  ],
+  "host": "5c00d851d526f90013472186.mockapi.io",
+  "basePath": "/api",
+  "paths": {
+    "/user/:id": {
+      "get": {
+        "tags": [
+          "Token"
+        ],
+        "summary": "Get user by Id",
+        "description": "Get user by Id, max id is 10",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "summary": "Create user",
+        "description": "create user",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User objectt",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/user"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
