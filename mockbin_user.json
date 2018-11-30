@@ -11,7 +11,7 @@
   "host": "5c00d851d526f90013472186.mockapi.io",
   "basePath": "/api",
   "paths": {
-    "/user/:id": {
+    "/user/1": {
       "get": {
         "tags": [
           "Token"
