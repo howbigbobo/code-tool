@@ -11,13 +11,19 @@
   "host": "5c00d851d526f90013472186.mockapi.io",
   "basePath": "/api",
   "paths": {
-    "/user/1": {
+    "/user/{userId}": {
       "get": {
-        "tags": [
-          "Token"
-        ],
         "summary": "Get user by Id",
         "description": "Get user by Id, max id is 10",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "integer",
+            "required": true,
+            "description": "Numeric ID of the user to get."
+          }
+        ],
         "produces": [
           "application/json"
         ],
